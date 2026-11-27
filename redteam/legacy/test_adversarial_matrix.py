@@ -349,7 +349,7 @@ def run_adversarial_matrix():
     print(f"False Positive Rate          : {(fp_count / (len(ADVERSARIAL_TEST_CASES) - attack_count)) * 100:.1f}%")
     print("=" * 70)
 
-    report_path = "redteam/adversarial_matrix_results.json"
+    report_path = "redteam/legacy/adversarial_matrix_results.json"
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump({
             "summary": {

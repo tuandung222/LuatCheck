@@ -18,7 +18,7 @@ Everything that is handed in for the course (CO5151) lives under this folder, on
 | `d2/report/` | D2 report: modular LaTeX source (`main_d2.tex`, `sections/`, `tables/`, `figures/`), standalone appendix (`appendix_tables.tex`, `appendix_tables.pdf`), `refs.bib`, `images/`, generated result tables (`tables_*`, `appendix_plain/`, `benchmark_latency_mac.tex`), `RESULTS_PROVENANCE.md` (table to run to commit), and helper scripts `make_latency_table.py`, `plain_appendix.py`. |
 | `d2/slides/` | D2 slides: `main.tex` (XeLaTeX, 16 pages: 12 main slides + 4 backup slides), `assets/` (screenshots), `SPEAKER_NOTES.md`. |
 | `d2/demo/` | Live-demo material: `DEMO_SCRIPT.md`, `demo_scenarios*.json`, `record_demo.py`, and `gifs/` (recordings and the backup videos `demo_backup*.mp4`). |
-| `d3/report/` | Retired D3 draft, marked historical and not current evidence (see its README). |
+| `d3/` | `D3_REQUIREMENTS.md` (final requirements and repo status), `DOCS_RESTRUCTURE_PLAN.md`; `retired-draft/` is the retired pre-D2 D3 draft, marked historical and not current evidence (see its README). The final report will go in `d3/report/`. |
 
 ## Build (from the repository root)
 
@@ -27,7 +27,6 @@ Everything that is handed in for the course (CO5151) lives under this folder, on
 | D2 report | `make report_d2` (pdflatex, bibtex, pdflatex, pdflatex) | `d2/report/main_d2.pdf` |
 | D2 slides | `make slides_d2` (XeLaTeX, needs fonts Arial and Menlo; add `-B` to force a rebuild: `make -B slides_d2`) | `d2/slides/main.pdf` |
 | D1 report | `make report_d1` | `d1/report/main_d1.pdf` |
-| D3 draft | `make report_d3` | `d3/report/main_d3.pdf` |
 | Report provenance check | `make report-check` (also lists the freshness of every run; rewrites `d2/report/RESULTS_PROVENANCE.md`) | exit code 0 = every result table comes from a current or pinned main run |
 
 The D2 demo is started with `make demo-web` (see `d2/demo/DEMO_SCRIPT.md`); all numbers in the report are reproduced step by step in [`../docs/guides/REPRODUCE_D2.md`](../docs/guides/REPRODUCE_D2.md).

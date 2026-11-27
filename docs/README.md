@@ -11,6 +11,7 @@ Project documentation of LuatCheck. Course deliverables (reports, slides, demo) 
 | [`design/`](design/) | Component design notes with the measurements behind each choice (ingestion, indexing, reranker, model components, wiring, benchmarking, span citations) | [wiring.md](design/wiring.md) |
 | [`images/`](images/) | Figures and demo GIFs used by the README and the report (`demo/`, `architecture.png`) | |
 | [`materials/`](materials/) | Source documents with provenance: HCMUT and labour-law PDFs, benchmark sources | [materials/d2/README.md](materials/d2/README.md) |
+| [`reviews/`](reviews/) | Dated evidence directories and review records from development; scripts there hard-code their paths, so they are not moved | [reviews/README.md](reviews/README.md) |
 | [`historical/`](historical/) | Archived historical development plans, internal session handoffs, dated review notes, and retired pre-D2 status records | [historical/README.md](historical/README.md) |
 
 ## Reference
