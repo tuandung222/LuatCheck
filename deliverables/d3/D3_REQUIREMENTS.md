@@ -1,6 +1,6 @@
 # D3 / D4 Final: yêu cầu quan trọng và đối chiếu với trạng thái repo
 
-Nhóm G8, hướng **Application**, đề tài LuatCheck. Thành viên (theo bìa D2): Lê Trí Quyền (nhóm trưởng, người gửi email nộp bài), Nguyễn Hoàng Phong, Võ Phạm Tuấn Dũng. Tổng hợp ngày 27-28/11/2026.
+Môn CO5151, HK261, lớp CH01, giảng viên Lê Xuân Bách. Nhóm G8, hướng **Application**, đề tài LuatCheck. Thành viên (theo bìa D2): Lê Trí Quyền (nhóm trưởng, người gửi email nộp bài), Nguyễn Hoàng Phong, Võ Phạm Tuấn Dũng. Tổng hợp ngày 27-28/11/2026.
 
 ## 0. Nguồn và cách kiểm tra
 
@@ -30,7 +30,20 @@ Phần mục 14 (trạng thái repo) dựa trên việc đọc mã, tài liệu 
 | Vào Meet kiểm tra âm thanh và chia sẻ màn hình (G5-G8) | 19:20 ngày 12/12. Link: https://meet.google.com/vsn-xeui-bcu |
 | Nộp trễ | Trừ 10% mỗi ngày, tối đa 3 ngày; sau đó bài nộp nhận 0. Gia hạn do giảng viên xác định theo thông báo, không tự trừ toàn bộ final hoặc trừ hai lần |
 
-Các nhóm khác (để biết lịch): G1-G4 trực tiếp tại B4-305 thứ Tư 09/12 từ 18:00 (có mặt trước 17:50); G5 19:30, G6 20:00, G7 20:30 và G8 21:00 ngày 12/12.
+Lịch đầy đủ (trình bày + demo / hỏi đáp; cả hai buổi thuộc tuần 50):
+
+| Nhóm | Ngày và hình thức | Trình bày + demo | Hỏi đáp |
+|---|---|---|---|
+| G1 | Thứ Tư 09/12/2026, B4-305 | 18:00-18:20 | 18:20-18:30 |
+| G2 | Thứ Tư 09/12/2026, B4-305 | 18:30-18:50 | 18:50-19:00 |
+| G3 | Thứ Tư 09/12/2026, B4-305 | 19:00-19:20 | 19:20-19:30 |
+| G4 | Thứ Tư 09/12/2026, B4-305 | 19:30-19:50 | 19:50-20:00 |
+| G5 | Thứ Bảy 12/12/2026, online | 19:30-19:50 | 19:50-20:00 |
+| G6 | Thứ Bảy 12/12/2026, online | 20:00-20:20 | 20:20-20:30 |
+| G7 | Thứ Bảy 12/12/2026, online | 20:30-20:50 | 20:50-21:00 |
+| **G8** | Thứ Bảy 12/12/2026, online | **21:00-21:20** | **21:20-21:30** |
+
+G1-G4 có mặt trước 17:50 ngày 09/12. G5-G8 vào Meet lúc 19:20 ngày 12/12 để kiểm tra âm thanh và chia sẻ màn hình.
 
 Mỗi nhóm báo cáo **một lần** 30 phút (20 trình bày + demo, 10 hỏi đáp). Lịch này thay thế lịch hai vòng bảo vệ và các hạn final trong thông báo trước.
 
@@ -87,7 +100,7 @@ Mức điểm: 9-10 xuất sắc; 7 đến dưới 9 tốt; 5 đến dưới 7 �
 - Sai phạm học thuật xử lý theo quy định môn học. Không dùng số liệu, nguồn hoặc đóng góp bịa.
 - Mỗi nhóm nhận danh sách điểm mạnh, hạn chế và nhận xét cuối; mỗi nhận xét chỉ rõ tiêu chí, trang/commit/log và lý do. Đối chiếu bảng phản hồi D2 (đã làm/chưa làm, bằng chứng).
 - Hệ số cá nhân dùng contribution statement, đánh giá nội bộ, sản phẩm thực tế và hỏi đáp; không dùng số commit làm thước đo duy nhất.
-- Đối chiếu rubric chung: C1 (architecture) ứng với A1 (+A2/B1); C2 (implementation, demo) với A2, B1, P2; C3 (evaluation, security) với A3, A4 (+P3); C4 (report, reproducibility) với A5, B2; C5 (presentation, defense, contribution) với P1, P3, P4 và hệ số cá nhân. Chỉ để đối chiếu, không phải phép chấm thứ hai.
+- Đối chiếu rubric chung: C1 (architecture) ứng với A1 (+A2/B1); C2 (implementation, demo) với A2, B1, P2; C3 (evaluation, security) với A3, A4 (+P3); C4 (report, reproducibility) với A5, B2; C5 (presentation, defense, contribution) với P1, P3, P4 và hệ số cá nhân. Chỉ để đối chiếu, không phải phép chấm thứ hai. Tài liệu chung có trọng số C1-C5 là 25/25/25/15/10 cho toàn đồ án, đồng thời nêu cơ cấu final 60/20/20; rubric này chọn cơ cấu theo sản phẩm để tính riêng F, không cộng hai bảng trọng số và không tuyên bố phép phân rã mới bảo toàn từng tỷ lệ C1-C5.
 
 **Excel `CO5151-Final-Rubric.xlsx`:** là mẫu bảng chấm của giảng viên cho cả 8 nhóm, chưa có điểm. Điểm nhập 0-10 bước 0.1; ô trống không phải điểm 0; mỗi nhóm cần đủ 11 điểm hợp lệ; Final = 60% báo cáo + 20% code + 20% bảo vệ, không làm tròn điểm trung gian; chưa xử lý nộp trễ và hệ số cá nhân. Công thức khớp với rubric PDF. Nhóm chỉ dùng để tự đối chiếu.
 
@@ -143,7 +156,7 @@ Nếu dùng LLM-as-judge: mô tả model, prompt, tiêu chí và cách kiểm tr
 
 ## 8. Trình bày, demo và hỏi đáp
 
-**20 phút trình bày + demo** (gợi ý, có thể điều chỉnh nhưng phải kết thúc phần này ở phút 20): 2 bài toán/đóng góp; 4 kiến trúc, tools, memory và các trục nâng cao; 6 live demo; 5 đánh giá, baseline/ablation, cost/latency, security; 3 thay đổi từ D2, hạn chế, kết luận.
+**20 phút trình bày + demo** (gợi ý, có thể điều chỉnh nhưng phải kết thúc phần này ở phút 20): 2 phút bài toán/đóng góp; 4 phút kiến trúc, tools, memory và các trục nâng cao; 6 phút live demo; 5 phút đánh giá, baseline/ablation, cost/latency, security; 3 phút thay đổi từ D2, hạn chế, kết luận.
 
 **10 phút hỏi đáp:** làm rõ lựa chọn thiết kế, kiểm tra code/trace, số liệu, bảo mật, giới hạn, đóng góp từng người. Mọi thành viên có mặt và sẵn sàng trả lời về phần mình; giảng viên có thể chỉ định người trả lời; không dành toàn bộ hỏi đáp cho một người.
 

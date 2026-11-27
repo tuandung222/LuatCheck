@@ -1,6 +1,6 @@
 # Kế hoạch tái cấu trúc tài liệu trước D3/D4
 
-Ngày 28/11/2026. Đây là **kế hoạch, chưa thực hiện thay đổi nào**. Căn cứ: đọc cây thư mục, so sánh các thư mục trùng, đối chiếu vài câu quan trọng giữa tài liệu và README. Phần kiến trúc sẽ được bổ sung khi agent vẽ lại sơ đồ bằng mã nguồn báo kết quả (mục 2, ghi rõ là chưa có).
+Ngày 28/11/2026. Đây là **kế hoạch, chưa thực hiện thay đổi nào**. Căn cứ: đọc cây thư mục, so sánh các thư mục trùng, đối chiếu vài câu quan trọng giữa tài liệu và README. Phần kiến trúc (mục 2) đã bổ sung từ kết quả agent vẽ lại sơ đồ bằng mã nguồn.
 
 Mục tiêu: người chấm D4 (B2 tái lập, 12% final) và chính nhóm chỉ cần một đường đi rõ ràng: README, một lệnh chạy, một lệnh tái lập, tài liệu khớp với mã; tài liệu cũ của D2 nằm ở nơi nhìn là biết đã lỗi thời.
 
@@ -20,9 +20,20 @@ Mục tiêu: người chấm D4 (B2 tái lập, 12% final) và chính nhóm ch�
 | P10 | `redteam/` còn kết quả của pipeline đã bỏ | `redteam/README.md`: HISTORICAL; `make redteam` bị vô hiệu | Yêu cầu D3 cần ≥10 ca chạy native; thư mục hiện gây hiểu lầm |
 | P11 | `docs/materials/` 29 MB gồm PDF nguồn pháp lý và tài liệu môn học lẫn nhau | `docs/materials/{benchmark-sources,hcmut-sources,labour-sources,d2,d3}` | Cần ghi rõ giấy phép/nguồn cho từng loại, nhất là khi thêm dataset công khai |
 
-## 2. Kiến trúc (chờ agent)
+## 2. Kiến trúc (kết quả agent vẽ lại bằng archify từ mã, 28/11/2026)
 
-Agent đang vẽ lại sơ đồ bằng skill `archify` từ mã `src/`. Khi có báo cáo, thêm vào đây danh sách các chỗ `architecture.md`, README và `docs/images/architecture.png` lệch với mã, và quyết định thay thế sơ đồ cũ bằng sơ đồ mới.
+Sơ đồ nằm ở `docs/images/architecture-archify/` (bản đầy đủ và bản gọn, HTML, SVG sáng/tối, PNG; chưa commit; thư mục làm việc `.archify/` chưa theo dõi). Agent ghim sơ đồ vào commit `139d751`; `git diff 139d751 HEAD -- src config` trống. Các cổng kiểm tra của archify (validate, deliver, check, browser-check) đều pass, 59 và 32 tham chiếu mã được xác minh; chưa có kiểm tra thị giác độc lập (`visualReview: not-requested`). Hai điểm tôi đã kiểm lại trong mã: `check_permission` chỉ có một chỗ gọi (`src/tools/domain_tools.py:317`), và `dense_model_type` chỉ được dùng ở nhánh `bm25_tfidf` của `src/pipeline/builder.py`.
+
+Chỗ sơ đồ cũ và tài liệu lệch với mã (theo agent, phần còn lại chưa tôi kiểm riêng):
+
+- `docs/images/architecture.png`: vẽ retrieval tầng đầu là BM25 + TF-IDF, trong khi demo dùng FTS5 (0,75) + vector EmbeddingGemma (0,25) với weighted RRF; đặt "query anchoring" trong retrieval thay vì trong vòng lặp; gộp NLI và L2 (thực tế là hai bước riêng, đều tắt); vẽ mũi tên "proposal" từ vòng lặp (thực tế do API tạo sau khi có câu trả lời); không nói 8 bước là giá trị của demo còn mặc định là 10.
+- `README.md`: mô tả L1 v2 như mặc định (chỉ đúng với profile demo; `config.yaml` dùng v1); nói weighted RRF và reranker là mặc định (chỉ đúng với demo); ghi bộ nhớ SQLite trong khi demo tắt bộ nhớ và audit log là JSONL; danh sách FAISS/HNSW/Qdrant chỉ đúng khi dựng index, vì `IndexedRetriever` từ chối FAISS lúc chạy.
+- `docs/reference/architecture.md`: chỉ nhắc `lexical_grounding.py` (v1), không nhắc `lexical_grounding_v2.py` mà demo dùng; nói `mcp_server.py` "exposes the same tools" trong khi `save_case` bị chặn và `send_summary` chỉ tạo đề xuất.
+- Phát hiện về quyền: mức `READ_ONLY` khai báo trong `permissions.py` nhưng không được kiểm lúc gọi; `record_case` (REVERSIBLE_WRITE) không có nơi gọi nào; luồng `send_summary` chỉ ghi vào hàng đợi cục bộ (`queued_locally`, chưa gửi thật). Điều này cần nói trung thực trong mục R2 của báo cáo.
+
+Agent không xác định được: các file index của demo (`data/index/` chỉ có `labor_code_2019_vi`, còn profile demo gọi `labour_vi_v1_gemma2_768d` và `hcmut_academic_v1_gemma2_768d`; có thể phải dựng lại hoặc tải từ Hugging Face), và nhà cung cấp embedding trong manifest index. Đây là điều kiện tái lập cần ghi vào D4.
+
+Việc tiếp theo cho bước 4 của kế hoạch: viết lại `architecture.md` từ sơ đồ mới, cập nhật hình trong README, và thêm bảng "mặc định so với demo".
 
 ## 3. Cấu trúc đích đề xuất
 
