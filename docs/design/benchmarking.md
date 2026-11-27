@@ -1,7 +1,7 @@
 # D2 benchmarking: matrix runner, judge, analysis, tables
 
-Updated 2026-10-23 22:35 +07. Step-by-step operation: `docs/guides/RUNBOOK_D2.md`. Metric definitions and the review of the D2 scenario: `docs/reviews/metrics_review_2026-10-23.md`.
-Benchmark quality caveats (saturated retrieval, closed-book guessable items): `docs/reviews/benchmark_quality_2026-10-23.md`.
+Updated 2026-10-23 22:35 +07. Step-by-step operation: `docs/guides/RUNBOOK_D2.md`. Metric definitions and the review of the D2 scenario: `docs/historical/reviews/metrics_review_2026-10-23.md`.
+Benchmark quality caveats (saturated retrieval, closed-book guessable items): `docs/historical/reviews/benchmark_quality_2026-10-23.md`.
 
 One command runs the whole matrix (benchmark x variant x seed) on real native inference, judges it and renders the tables:
 
@@ -56,7 +56,7 @@ The checks do not certify the gold answers; both benchmarks are AI-verified, not
 
 ## 1b. Diagnostic baselines
 
-`d2_matrix.yaml: baselines` adds `closed_book` (all tasks) and `oracle` (answerable tasks, gold records given up front in the read-tool observation format) at seed 42, same controller / sampler / domain prompt / constrained decoding, answer-clarify-refuse only, verification off (190 extra trials). `--baselines closed_book,oracle|none` overrides. They are separate cells (`arm: baseline`), judged by the same judge, shown in `tab:benchmark-baselines` with system rows as answerable-only reference rows, and excluded from the system tables and paired comparisons. See `docs/reviews/metrics_review_2026-10-23.md` section 1.6.
+`d2_matrix.yaml: baselines` adds `closed_book` (all tasks) and `oracle` (answerable tasks, gold records given up front in the read-tool observation format) at seed 42, same controller / sampler / domain prompt / constrained decoding, answer-clarify-refuse only, verification off (190 extra trials). `--baselines closed_book,oracle|none` overrides. They are separate cells (`arm: baseline`), judged by the same judge, shown in `tab:benchmark-baselines` with system rows as answerable-only reference rows, and excluded from the system tables and paired comparisons. See `docs/historical/reviews/metrics_review_2026-10-23.md` section 1.6.
 
 ## 2. Preflight (every run, also `run_d2.py preflight`)
 
@@ -82,7 +82,7 @@ Packets are blinded (no variant, seed, benchmark, timing); the judge sees the qu
 Judge attempts are stored one file each and never overwritten; invalid / unparseable / unfinished judgments are retried (3 attempts, then `judge_extra_rounds` more rounds); packets still invalid are `unknown` (failure in the lower bound, listed, dagger in the tables).
 The judge stage is refused when `packets_to_judge x planning_usd_per_packet` exceeds `max_judge_usd`. Key from `evaluation.judge_gateway.local_environment()` only; without it the stage reports `judge_unavailable` (exit 6) and collection / tables still complete.
 
-`analysis/summary.json` per benchmark x variant (details and definitions: `docs/reviews/metrics_review_2026-10-23.md`): strict success (lower / upper bound, task-level bootstrap CI, seed spread, pass^k-style consistency), judge behaviour, claim faithfulness (micro, macro),
+`analysis/summary.json` per benchmark x variant (details and definitions: `docs/historical/reviews/metrics_review_2026-10-23.md`): strict success (lower / upper bound, task-level bootstrap CI, seed spread, pass^k-style consistency), judge behaviour, claim faithfulness (micro, macro),
 retrieval trace metrics (Recall@k, Hit@k, MRR, nDCG@5, trace/read recall, saturation share, rerank first-stage vs returned), citation-ID precision / recall / F1 (macro, conditional, micro) and groundedness checks, behaviour confusion matrix with abstention rates,
 error profile (rate, Wilson CI, kinds, timeouts), latency (trial p50/p95 non-error and all, per call, non-model, rerank, decode / prefill tokens/s; mac-latency only), tokens, calls, lexical proxy (labelled), judge cost (gateway-reported; not an invoice),
 strict success by closed-book stratum, and `paired_differences` (paired task-level bootstrap for the comparisons in `variants.yaml`, per benchmark and pooled, also by stratum).

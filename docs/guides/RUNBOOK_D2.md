@@ -1,8 +1,10 @@
 # RUNBOOK D2 - benchmark collection on server 82 (accuracy) and on the Mac (latency)
 
+> **Status note, 2026-11-28 (UTC+7).** Historical handoff written on 2026-10-23 for the agent that ran the D2 benchmarks that night; "tonight" and the "hands off" rules refer to that run, which is finished. Kept as the record of how the D2 runs were collected and as a starting point for D3. Background documents it names now live under `docs/historical/` (paths updated). Not re-verified against the current code.
+
 Written 2026-10-23 22:30 +07 (UTC+7). For the agent that runs the D2 benchmarks tonight. Read `AGENTS.md` first: real inference only, a backend failure is an execution
 error (never an answer or refusal), nothing is filled in, failed runs are preserved, no commit/push, never print or read `.env` (the judge key is read by
-`evaluation.judge_gateway.local_environment()` only). Background: `docs/plans/D2_COMPLETION_PLAN.md`, `docs/design/benchmarking.md`, `docs/reviews/metrics_review_2026-10-23.md`.
+`evaluation.judge_gateway.local_environment()` only). Background: `docs/historical/plans/D2_COMPLETION_PLAN.md`, `docs/design/benchmarking.md`, `docs/historical/reviews/metrics_review_2026-10-23.md`.
 
 What is being run: 2 benchmarks (`hcmut_v1`, `labour_vi_v1`, frozen, 50 tasks each) x 3 variants (`off`, `l1`, `l1_rerank`) x 3 seeds (42, 123, 2026) = **900 system trials per machine** plus **190 diagnostic-baseline trials** (`closed_book` on all 50 tasks and `oracle` on the 45 answerable tasks of each benchmark, seed 42, no tools; reported in their own table, never pooled; they run automatically in `all`, disable with `--baselines none`), controller
 Ternary Bonsai 2 2B GGUF (PQ2_0) on the PrismML llama.cpp fork **commit 73bfe6c**, judge DeepSeek Flash through the gateway. Everything is config
@@ -211,7 +213,7 @@ Expect `comparable: false` only through `may_differ`-type differences being list
 ## F. Post-hoc revision r2 on server 82 (2B on GPU 2, 4B on GPU 3) and the v3-vs-r2 comparison
 
 Written 2026-10-24 (UTC+7). The frozen v3 runs (`d2-gpu-main-{hcmut,labour}-v3`, commit 957579b, harness 1.1.2) stay the pre-planned result and are **pinned** in the registry (`pinned@957579b`).
-The revision r2 (ten opt-in switches, see the comment header of `config/benchmark/model_prism_gguf2b_r2.yaml` and `docs/reviews/v3_failure_analysis_2026-10-24.md`) was designed AFTER
+The revision r2 (ten opt-in switches, see the comment header of `config/benchmark/model_prism_gguf2b_r2.yaml` and `docs/historical/reviews/v3_failure_analysis_2026-10-24.md`) was designed AFTER
 the v3 results of `hcmut_v1` / `labour_vi_v1` were seen. Its runs are `kind: main` but carry `protocol: r2-posthoc`; every table and `RUN_NOTES.md` prints **"post-hoc revision evaluated on the same tasks"**.
 Same matrix as v3 (2 benchmarks x 3 variants x 3 seeds + closed_book/oracle) for two controllers: 2B (isolates the system fix) and 4B (isolates model size on the revised system).
 Run ids: `d2-gpu-r2-{2b,4b}-{hcmut,labour}-v1` (one run per benchmark, as for v3, so a resume stays small).

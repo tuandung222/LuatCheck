@@ -87,7 +87,7 @@ eval_d3:
 	@echo "No automatic experiments. See docs/guides/RUNBOOK_D2.md for explicit native collection commands."
 
 redteam:
-	@echo "Legacy red-team scorer is disabled. Threat-model review is in deliverables/d2/report/main_d2.pdf (Section 6)."
+	@echo "Legacy red-team scorer is disabled (moved to redteam/legacy/). Attack cases for D3: redteam/test_cases.json; protocol and status: redteam/README.md. Threat-model review of D2: deliverables/d2/report/main_d2.pdf (Section 6)."
 
 demo:
 	streamlit run src/ui/app.py --server.port $(PORT) --server.headless $(HEADLESS) --browser.gatherUsageStats false
@@ -113,7 +113,7 @@ demo-web-gemma2:
 web-build:
 	npm --prefix frontend run build
 
-report: report_d2 report_d3
+report: report_d2
 
 report_d2:
 	cd deliverables/d2/report && \
@@ -125,13 +125,10 @@ report_d2:
 	pdflatex -interaction=nonstopmode appendix_tables.tex && \
 	pdflatex -interaction=nonstopmode appendix_tables.tex
 
+# Retired: the pre-D2 D3 draft (deliverables/d3/retired-draft/) is not evidence and is not built. The real D3 report
+# lives in deliverables/d3/report/ (to be written); add its target here when it exists.
 report_d3:
-	cd deliverables/d3/report && \
-	rm -f *.aux *.bbl *.blg *.out *.log *.run.xml *-blx.bib *.toc *.lot *.lof && \
-	pdflatex -interaction=nonstopmode main_d3.tex && \
-	bibtex main_d3 && \
-	pdflatex -interaction=nonstopmode main_d3.tex && \
-	pdflatex -interaction=nonstopmode main_d3.tex
+	@echo "report_d3 is retired. The old draft is in deliverables/d3/retired-draft/ (historical, not evidence)."; exit 1
 
 report_d1:
 	cd deliverables/d1/report && \
@@ -148,7 +145,7 @@ slides_d2:
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
-	find deliverables/d2/report deliverables/d3/report -type f \( -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.bbl" -o -name "*.blg" -o -name "*.run.xml" -o -name "*-blx.bib" -o -name "*.toc" -o -name "*.lot" -o -name "*.lof" \) -delete 2>/dev/null || true
+	find deliverables/d2/report -type f \( -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.bbl" -o -name "*.blg" -o -name "*.run.xml" -o -name "*-blx.bib" -o -name "*.toc" -o -name "*.lot" -o -name "*.lof" \) -delete 2>/dev/null || true
 
 # ---- D2 benchmarking: evaluation/run_d2.py drives run_benchmark.py, judge_benchmark.py, render_benchmark_tables.py
 # (docs/design/benchmarking.md, docs/guides/RUNBOOK_D2.md). It never starts a model server (see prism-server / prism-server-gpu /
